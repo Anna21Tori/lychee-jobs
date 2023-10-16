@@ -13,14 +13,14 @@ export default function RootLayout({
   return (
     <>
         {isLoading ? "Loading..." : 
-        <div className="container">
-            <div className="row">
+        <div className="container-fluid">
+            <div className="row" style={{border: "1px solid rgb(220, 220, 220)"}}>
               <div className="col-12 py-3">
                 <Navbar />
               </div>
             </div>
             <div className="row">
-                <div className="col-12">
+                <div className="col-12 pt-3">
                 {user ? employer : anyone}
                 </div>
               </div>
