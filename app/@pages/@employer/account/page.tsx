@@ -56,7 +56,7 @@ export default function Page() {
     const handleSubmit = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
         
-        fetch("/api/employers", {
+        fetch("/api/employers/company", {
             method: company.id ? "PATCH" : "POST",
             body: JSON.stringify(company),
             headers: {

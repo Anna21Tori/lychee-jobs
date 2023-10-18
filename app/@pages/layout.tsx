@@ -15,7 +15,7 @@ export default function RootLayout({
         {isLoading ? "Loading..." : 
         <div className="container-fluid">
             <div className="row" style={{border: "1px solid rgb(220, 220, 220)"}}>
-              <div className="col-12 py-3">
+              <div className="col-12 py-1">
                 <Navbar />
               </div>
             </div>

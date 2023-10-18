@@ -1,6 +1,7 @@
 import { Box, Button, FormControl, Input, InputLabel} from "@mui/material"
 import { ICompany } from "../page"
 import { ChangeEvent, MouseEvent } from "react";
+import CustomInput from "@/app/_components/form/custom-input.component";
 
 export interface IAddEditFormProps {
     data: ICompany,

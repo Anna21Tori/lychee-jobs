@@ -20,7 +20,7 @@ const Navbar = () => {
                 {
                     user ? 
                     <Stack direction="row" alignItems="center">
-                        {/* <NavButton slug="/api/auth/logout">Log out</NavButton>  */}
+                        {pathname === "/" ? <NavButton slug="add-offer">Add offer</NavButton> : ""}
                         <AccountMenu user={user}/>
                         
                     </Stack>
