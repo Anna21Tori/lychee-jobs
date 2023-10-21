@@ -25,7 +25,7 @@ export default function Page() {
     const [isDone, setIsDone] = useState(false);
 
     const data = useData<ICompany[]>({
-        url: `/api/employers`,
+        url: `/api/employers/company`,
         method: "GET",
         headers: {
           "content-type": "application/json",
