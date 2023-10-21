@@ -8,7 +8,7 @@ export default function EmployersPage() {
     return (
         <div className="container">
             <div className="row">
-                <div className="col-12">
+                <div className="col-8 offset-2">
                     <OfferList />
                 </div>
             </div>

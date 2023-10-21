@@ -1,15 +1,16 @@
 'use client'
-import { Avatar, IconButton, List, ListItem, ListItemAvatar, ListItemText } from "@mui/material"
-import { Delete } from '@mui/icons-material';
+import { Avatar, Divider, IconButton, List, ListItem, ListItemAvatar, ListItemText } from "@mui/material"
+import { Delete, Business, Edit} from '@mui/icons-material';
 import { useEffect, useState } from "react";
-import { IOffer } from "./interfaces";
+import { IOffer, experiences } from "./interfaces";
+import { useRouter } from 'next/navigation';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const LOADED_ITEMS = 1;
 const OfferList = () => {
     const [offers, setOffers] = useState<IOffer[]>([]);
     const [offset, setOffset] = useState(1);
-    const [hasMore, setHasMore] = useState(true)
+    const router = useRouter();
       
     useEffect(() => {
 
@@ -43,36 +44,52 @@ const OfferList = () => {
 
         result.json().then(res => {
             const data = res.data as IOffer[];
-            // if(data.length === 0){
-            //     setHasMore(false);
-            //     return;
-            // }
             setOffers([... offers, ... data as IOffer[]])
         })
 
         setOffset(offset + 1);
         console.log
     }
+    
+    const formatSubText = (offer: IOffer) => {
+      let sub = offer.location;
+      if(offer.experience !== "" && Object.keys(experiences).includes(offer.experience))
+        sub += ` | ${experiences[offer.experience]}`;
+      return sub;
+    }
 
-    const items = offers.map(item => {
+    const redirectTo = (slug: string) => {
+      router.push(slug);
+    }
+
+    const items = offers.map((item, id) => {
         return (
-            <ListItem
+          <>
+             {id % 2 ? <Divider variant="fullWidth" component="li" /> : "" }
+             <ListItem
+                  key={id}
                   secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <Delete />
-                    </IconButton>
+                    <>
+                      <IconButton edge="end" aria-label="edit" onClick={() =>  redirectTo(`/offers/${item.id}`)}>
+                        <Edit />
+                      </IconButton>
+                      <IconButton edge="end" aria-label="delete">
+                        <Delete />
+                      </IconButton>
+                    </>
                   }
                 >
                   <ListItemAvatar>
                     <Avatar variant="rounded">
-                      
+                        <Business />
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
                     primary={item.position}
-                    secondary={`${item.location} | ${item.experience}`}
+                    secondary={formatSubText(item)}
                   />
             </ListItem>
+          </>
         )
     })
     return (
@@ -85,7 +102,7 @@ const OfferList = () => {
                           <b>No more offerts</b>
                         </p>
                       }
-                    hasMore={hasMore}
+                    hasMore={true}
                     loader={<h4>Loading...</h4>}
                 >
                     {items}

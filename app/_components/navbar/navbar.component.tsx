@@ -13,14 +13,14 @@ const Navbar = () => {
     const pathname = usePathname();
     return(
         <div className="d-flex justify-content-between">
-            <div>
+            <div className="d-flex align-self-center">
                 <NavBrand/>
             </div>
             <div className="d-flex justify-content-between">
                 {
                     user ? 
                     <Stack direction="row" alignItems="center">
-                        {pathname === "/" ? <NavButton slug="add-offer">Add offer</NavButton> : ""}
+                        {pathname === "/" ? <NavButton slug="offers/add">Add offer</NavButton> : ""}
                         <AccountMenu user={user}/>
                         
                     </Stack>
